@@ -8,7 +8,6 @@ use App\Utils\Config;
 
 echo "Preenchendo banco." . PHP_EOL;
 
-// Carrega variáveis de ambiente (necessário para a PIMENTA)
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
@@ -16,11 +15,12 @@ $pdo = Database::getConnection();
 
 echo "Verificando setores." . PHP_EOL;
 $setores = [
-    ['1', 'Secretaria', '#007bff'], // Azul
-    ['2', 'Biblioteca', '#28a745'], // Verde
-    ['3', 'TI',         '#dc3545'], // Vermelho
-    ['4', 'Diretoria',  '#8604cd'], // Amarelo
-    ['5', 'Estágios',   '#17a2b8']  // Ciano
+    ['1', 'Secretaria',           '#007bff'],
+    ['2', 'Biblioteca',           '#28a745'],
+    ['3', 'TI',                   '#dc3545'],
+    ['4', 'Diretoria',            '#8604cd'],
+    ['5', 'Estágios',             '#17a2b8'],
+    ['6', 'Assistência social',   '#b93b0a']
 ];
 
 $sqlSetor = <<<SQL
@@ -40,7 +40,7 @@ foreach ($setores as $setor) {
 
 echo "Inserindo períodos" . PHP_EOL;
 $periodos = [
-    ['1', 'Manha', '00:00:00', '12:59:59'],
+    ['1', 'Manhã', '00:00:00', '12:59:59'],
     ['2', 'Tarde', '13:00:00', '17:59:59'],
     ['3', 'Noite', '18:00:00', '23:59:59']
 ];
@@ -94,11 +94,7 @@ try {
 echo "Criando avisos." . PHP_EOL;
     $sqlAviso1 = <<<SQL
         INSERT INTO avisos (idAviso, titulo, texto, urgente, datahora_validade, idSetor, publico_alvo, criado_por, created_at)
-        VALUES (NULL, 'Dragon Ball Super - Final do torneio do poder', 'O final do Torneio do Poder em Dragon Ball Super acontece no 48º episódio,
-        quando Goku e os demais universos lutam pela sobrevivência. Após uma batalha intensa, Goku e Frieza, do Universo 7, são os últimos sobreviventes.
-        No combate final contra Jiren, do Universo 11, Goku atinge uma nova forma, o \"Ultra Instinct\" (Instinto Superior), mas acaba exausto.
-        Frieza, com a ajuda de Goku, dá o golpe final, derrotando Jiren e garantindo a vitória para o Universo 7. No final, Zeno-sama apaga o Universo 11,
-        mas o desejo das Super Esferas do Dragão ressuscita todos os universos eliminados.', '0',
+        VALUES (NULL, 'Dragon Ball Super - Final do torneio do poder', 'O final do Torneio do Poder em Dragon Ball Super acontece no 48º episódio, quando Goku e os demais universos lutam pela sobrevivência. Após uma batalha intensa, Goku e Frieza, do Universo 7, são os últimos sobreviventes. No combate final contra Jiren, do Universo 11, Goku atinge uma nova forma, o \"Ultra Instinct\" (Instinto Superior), mas acaba exausto. Frieza, com a ajuda de Goku, dá o golpe final, derrotando Jiren e garantindo a vitória para o Universo 7. No final, Zeno-sama apaga o Universo 11, mas o desejo das Super Esferas do Dragão ressuscita todos os universos eliminados.', '0',
         '2025-12-18 17:25:52.000000', '2', 'Todos', '1', current_timestamp());
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('1', '1'); 
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('1', '2');
@@ -106,11 +102,8 @@ echo "Criando avisos." . PHP_EOL;
 
     $sqlAviso2 = <<<SQL
         INSERT INTO avisos (idAviso, titulo, texto, urgente, datahora_validade, idSetor, publico_alvo, criado_por, created_at)
-        VALUES (NULL, 'Sousou no Frieren - T02', 'A história continua com a elfa maga Frieren,
-        agora viajando com seus companheiros Fern e Stark, explorando regiões dominadas por demônios e enfrentando novos perigos.
-        A nova temporada adapta o arco de “viagens ao norte” do mangá — a partir do capítulo 60 — prometendo batalhas intensas,
-        crescimento dos personagens e mais sobre a jornada de Frieren após a derrota do Rei Demônio.
-        A animação continua a cargo do estúdio Madhouse, com direção de Tomoya Kitagawa e supervisão de Keiichiro Saito.',
+        VALUES (NULL, 'Sousou no Frieren - T02',
+        'A história continua com a elfa maga Frieren, agora viajando com seus companheiros Fern e Stark, explorando regiões dominadas por demônios e enfrentando novos perigos. A nova temporada adapta o arco de “viagens ao norte” do mangá — a partir do capítulo 60 — prometendo batalhas intensas, crescimento dos personagens e mais sobre a jornada de Frieren após a derrota do Rei Demônio. A animação continua a cargo do estúdio Madhouse, com direção de Tomoya Kitagawa e supervisão de Keiichiro Saito.',
         '0', '2025-12-31 23:59:59', '4', 'Alunos', '1', current_timestamp());
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('2', '1');
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('2', '2');
@@ -119,15 +112,8 @@ echo "Criando avisos." . PHP_EOL;
 
     $sqlAviso3 = <<<SQL
         INSERT INTO avisos (idAviso, titulo, texto, urgente, datahora_validade, idSetor, publico_alvo, criado_por, created_at)
-        VALUES (NULL, 'Solicitação de matricula e trancamento 2026.1', 'As solicitações de matrícula e trancamento para o período 
-        2026.1 deverão ser realizadas exclusivamente pelo Portal do Aluno (alunos.cefet-rj.br).
-        O procedimento é obrigatório para todos os estudantes a partir do segundo período, 
-        que devem acessar o sistema dentro dos prazos divulgados pela instituição para escolher 
-        disciplinas, ajustar horários ou solicitar o trancamento do período letivo. 
-        Os alunos ingressantes não precisam solicitar matrícula em disciplinas, pois suas inscrições são 
-        efetuadas automaticamente pela instituição. Recomenda-se que cada estudante acompanhe regularmente 
-        o portal para evitar pendências e garantir a efetivação correta de sua situação acadêmica para o 
-        início do semestre.',
+        VALUES (NULL, 'Solicitação de matricula e trancamento 2026.1',
+        'As solicitações de matrícula e trancamento para o período 2026.1 deverão ser realizadas exclusivamente pelo Portal do Aluno (alunos.cefet-rj.br). O procedimento é obrigatório para todos os estudantes a partir do segundo período, que devem acessar o sistema dentro dos prazos divulgados pela instituição para escolher disciplinas, ajustar horários ou solicitar o trancamento do período letivo. Os alunos ingressantes não precisam solicitar matrícula em disciplinas, pois suas inscrições são efetuadas automaticamente pela instituição. Recomenda-se que cada estudante acompanhe regularmente o portal para evitar pendências e garantir a efetivação correta de sua situação acadêmica para o início do semestre.',
         '3', '2026-02-01 23:59:59', '1', 'Alunos', '1', current_timestamp());
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('3', '1');
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('3', '2');
@@ -136,14 +122,24 @@ echo "Criando avisos." . PHP_EOL;
 
     $sqlAviso4 = <<<SQL
         INSERT INTO avisos (idAviso, titulo, texto, urgente, datahora_validade, idSetor, publico_alvo, criado_por, created_at)
-        VALUES (NULL, 'Portal do Aluno - Manutenção', 'Informamos que, devido a uma manutenção emergencial no sistema acadêmico,
-        o acesso ao portal do aluno poderá apresentar instabilidades ao longo do dia. Pedimos que tentem novamente após alguns minutos caso encontrem dificuldades. 
-        A previsão é que tudo seja normalizado até o final da tarde. Agradecemos pela compreensão.',
+        VALUES (NULL, 'Portal do Aluno - Manutenção',
+        'Informamos que, devido a uma manutenção emergencial no sistema acadêmico, o acesso ao portal do aluno poderá apresentar instabilidades ao longo do dia. Pedimos que tentem novamente após alguns minutos caso encontrem dificuldades.  A previsão é que tudo seja normalizado até o final da tarde. Agradecemos pela compreensão.',
         '1', '2026-02-02 23:59:59', '3', 'Alunos', '1', current_timestamp()); 
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '1');
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '2');
         INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '3');
     SQL;
+
+    $sqlAviso5 = <<<SQL
+        INSERT INTO avisos (idAviso, titulo, texto, urgente, datahora_validade, idSetor, publico_alvo, criado_por, created_at)
+        VALUES (NULL, 'Assistência social - informativos',
+        'O Setor de Assistência Social lembra a todos os estudantes da importância de manter boas práticas no uso dos sistemas acadêmicos e nos trabalhos das disciplinas. Reforçamos especialmente a necessidade de atenção ao realizar alterações em bancos de dados: um simples UPDATE sem WHERE pode transformar um exercício inocente em uma verdadeira crise pessoal. E, convenhamos, se isso acontecer, não será apenas o banco que vai precisar de ajuda, será você mesmo procurando o Setor de Assistência Social depois de ver tudo ser sobrescrito de uma vez só. Por isso, cuidem-se, revisem o código e sempre usem WHERE.',
+        '1', '2026-02-03 23:59:59', '5', 'Alunos', '1', current_timestamp()); 
+        INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('5', '1');
+        INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('5', '2');
+        INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('5', '3');
+    SQL;
+
 try {
     echo "Inserindo aviso 1" . PHP_EOL;
     $psAviso = $pdo->prepare($sqlAviso1);
@@ -159,6 +155,10 @@ try {
 
     echo "Inserindo aviso 4" . PHP_EOL;
     $psAviso = $pdo->prepare($sqlAviso4);
+    $psAviso->execute();
+
+    echo "Inserindo aviso 5" . PHP_EOL;
+    $psAviso = $pdo->prepare($sqlAviso5);
     $psAviso->execute();
     
 } catch (Exception $e) {
@@ -197,4 +197,3 @@ INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '1');
 INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '2');
 INSERT INTO avisos_periodos (idAviso, idPeriodo) VALUES ('4', '3');
 */
-

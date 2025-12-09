@@ -14,8 +14,7 @@ class PeriodoService
     }
 
     /**
-     * Busca todos os Periodos do repositório, aplicando o filtro.
-     * @param string|null $filtro
+     * Busca todos os Periodos do repositório
      * @return array<int, array<string, mixed>>
      */
     public function listarPeriodos(): array

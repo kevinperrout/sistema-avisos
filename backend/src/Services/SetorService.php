@@ -14,8 +14,7 @@ class SetorService
     }
 
     /**
-     * Busca todos os Setors do repositório, aplicando o filtro.
-     * @param string|null $filtro
+     * Busca todos os Setores do repositório
      * @return array<int, array<string, mixed>>
      */
     public function listarSetores(): array

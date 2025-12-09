@@ -10,13 +10,11 @@ interface AvisoRepository
      */
     public function listar(): array;
 
-    // /**
-    //  * Lista todos os assuntos que pertencem a um aviso.
-    //  * @param int $idAviso
-    //  * @return array<int, array<string, mixed>>
-    //  */
-    // public function listarAssuntosPorAviso(int $idAviso): array;
-
+    /**
+     * Lista todos os assuntos que pertencem a um aviso.
+     * @param array<int> $periodos
+     * @return int
+     */
     public function salvarAviso(
         string $titulo,
         string $texto,

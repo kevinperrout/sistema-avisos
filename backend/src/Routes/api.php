@@ -6,7 +6,6 @@ use App\Infraestructure\Sessao;
 
 use App\Controllers\UsuarioController;
 use App\Repositories\UsuarioRepositoryBDR;
-use App\Services\UsuarioService;
 
 use App\Controllers\AvisoController;
 use App\Presenters\AvisoPresenter;
@@ -41,12 +40,11 @@ return function (App $app) {
     $authService = new AuthService($usuarioRepository);
 
     // Configuração do Usuário
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($authService, $usuarioService, $sessao);
+    $usuarioController = new UsuarioController($authService, $sessao);
 
     // Aviso
     $avisoService = new AvisoService($avisoRepository);
-    $avisoPresenter = new AvisoPresenter($avisoService);
+    $avisoPresenter = new AvisoPresenter();
     $avisoController = new AvisoController($avisoService, $avisoPresenter, $sessao);
 
     $periodoService = new PeriodoService($periodoRepository);

@@ -62,9 +62,7 @@ class AvisoRepositoryBDR implements AvisoRepository
             INSERT INTO avisos_periodos (idAviso, idPeriodo)
             VALUES (:idAviso, :idPeriodo) 
         SQL;
-
         try {
-
             $this->pdo->beginTransaction();
             $stmt = $this->pdo->prepare($sqlAviso);
             $stmt->execute([

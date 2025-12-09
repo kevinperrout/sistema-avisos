@@ -6,15 +6,12 @@ use App\Repositories\AvisoRepository;
 
 class AvisoService
 {
-    
-
     public function __construct(
         private AvisoRepository $repository
-    ){}
+    ) {}
 
     /**
-     * Busca todos os avisos do repositório, aplicando o filtro.
-     * @param string|null $filtro
+     * Busca todos os avisos do repositório
      * @return array<int, array<string, mixed>>
      */
     public function listarTodosAvisos(): array
@@ -23,26 +20,26 @@ class AvisoService
     }
 
     /**
-     * Retorna a lista de assuntos de um aviso pelo seu ID.
-     * @param int $idAviso
-     * @return array
-     * @return array<int, array<string, mixed>>
+     * Envia o aviso ao repositório para ser salvo.
+     * @param array<string, mixed> $dados
+     * @param int $id
+     * @return int
      */
-    public function criarAviso($dados, $id): int
+    public function criarAviso($dados, $id): string|null
     {
-        // $idAviso = $this->repository->salvarAviso($dados);
-        
-        $idAviso = $this->repository->salvarAviso(
-            $dados['titulo'],
-            $dados['texto'],
-            (int)$dados['urgente'],
-            $dados['dataValidade'],
-            (int)$dados['idSetor'],
-            $dados['publicoAlvo'],
-            $dados['idsPeriodos'],
-            (int)$id
-        );
-
+        $idAviso = NULL;
+        if ($id) {
+            $idAviso = $this->repository->salvarAviso(
+                $dados['titulo'],
+                $dados['texto'],
+                (int)$dados['urgente'],
+                $dados['dataValidade'],
+                (int)$dados['idSetor'],
+                $dados['publicoAlvo'],
+                $dados['idsPeriodos'],
+                (int)$id
+            );
+        }
         return $idAviso;
     }
 }
