@@ -1,0 +1,51 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+@media (max-width: 992px) {
+  aside {
+    display: none !important;
+  }
+}
+
+.card img {
+  object-fit: cover;
+  height: 160px;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: all 0.25s ease-in-out;
+}
+
+body:not(.mode-tv) .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+body.mode-tv {
+  overflow: hidden;
+  background-color: #000;
+}
+
+body.mode-tv #sidebar,
+body.mode-tv .navbar {
+  display: none !important;
+}
+
+body.mode-tv main#app {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  
+  flex: 0 0 100%; 
+  display: block;
+}
+
+body.mode-tv .container-fluid {
+  border-radius: 0 !important;
+}
