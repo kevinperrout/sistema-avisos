@@ -23,9 +23,9 @@ class AvisoService
      * Envia o aviso ao repositório para ser salvo.
      * @param array<string, mixed> $dados
      * @param int $id
-     * @return int
+     * @return int|null
      */
-    public function criarAviso($dados, $id): string|null
+    public function criarAviso($dados, $id): int|null
     {
         $idAviso = NULL;
         if ($id) {
