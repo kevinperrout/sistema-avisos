@@ -13,11 +13,11 @@ export class AuthModel {
     const credenciais = JSON.stringify({ email, senha });
     const urlLogin = "/login";
 
-    const res = await fetch('http://localhost:8080' + API_BASE + urlLogin, {
+    const res = await fetch("http://localhost:8080" + API_BASE + urlLogin, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: credenciais,
-      credentials: "include"
+      credentials: "include",
     });
 
     if (!res.ok) {
@@ -31,7 +31,7 @@ export class AuthModel {
     }
 
     if (!dadosDoBackend.idUsuario && !dadosDoBackend.id) {
-        throw new Error("Resposta inválida do servidor. Sem ID.");
+      throw new Error("Resposta inválida do servidor. Sem ID.");
     }
 
     const usuario: Usuario = {
@@ -40,7 +40,7 @@ export class AuthModel {
       nome: dadosDoBackend.nome,
     };
 
-    localStorage.setItem(this.storageKey, JSON.stringify(usuario));
+    this.salvarSessaoSegura(usuario);
     document.dispatchEvent(new Event("usuarioLogado"));
 
     return usuario;
@@ -53,10 +53,26 @@ export class AuthModel {
 
   getUsuario(): Usuario | null {
     const raw = localStorage.getItem(this.storageKey);
-    return raw ? (JSON.parse(raw) as Usuario) : null;
+    if (!raw) return null;
+
+    try {
+      const jsonString = atob(raw);
+      return JSON.parse(jsonString) as Usuario;
+    } catch (error) {
+      console.error("Erro ao decodificar sessão:", error);
+      this.logout();
+      return null;
+    }
   }
 
   isAutenticado(): boolean {
     return !!this.getUsuario();
+  }
+
+  private salvarSessaoSegura(usuario: Usuario): void {
+    const jsonString = JSON.stringify(usuario);
+    // btoa() converte string para Base64
+    const base64 = btoa(jsonString);
+    localStorage.setItem(this.storageKey, base64);
   }
 }
