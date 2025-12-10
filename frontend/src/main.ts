@@ -40,6 +40,7 @@ page("/tv", async () => {
 
 page("/avisos/novo", () => {
   if (!auth.isAutenticado()) {
+    alert("Recurso indisponível")
     page.redirect("/");
     return;
   }

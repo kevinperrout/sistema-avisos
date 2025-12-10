@@ -17,9 +17,6 @@ class PeriodoController extends ApiController
 
     public function listar(Request $request, Response $response): Response
     {
-        // if ($retornoPermissao = $this->verificarPermissao($response, $this->sessao, ['admin', 'professor'])) {
-        //     return $retornoPermissao;
-        // }
         $listaPeriodos = $this->PeriodoService->listarPeriodos();
 
         return $this->json($response, $listaPeriodos);

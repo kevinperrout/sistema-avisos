@@ -22,13 +22,13 @@ class AvisoService
     /**
      * Envia o aviso ao repositório para ser salvo.
      * @param array<string, mixed> $dados
-     * @param int $id
+     * @param int $idUsuario
      * @return int|null
      */
-    public function criarAviso($dados, $id): int|null
+    public function criarAviso($dados, $idUsuario): int|null
     {
         $idAviso = NULL;
-        if ($id) {
+        if ($idUsuario) {
             $idAviso = $this->repository->salvarAviso(
                 $dados['titulo'],
                 $dados['texto'],
@@ -37,7 +37,7 @@ class AvisoService
                 (int)$dados['idSetor'],
                 $dados['publicoAlvo'],
                 $dados['idsPeriodos'],
-                (int)$id
+                (int)$idUsuario
             );
         }
         return $idAviso;

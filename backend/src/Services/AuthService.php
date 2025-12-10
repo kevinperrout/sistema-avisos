@@ -39,19 +39,4 @@ class AuthService
             'usuario' => $usuario
         ];
     }
-
-    /**
-     * Verifica permissões dos usuarios
-     * Retorna uma Response 403 se proibido, ou null se permitido.
-     * @param array<string> $cargosPermitidos Ex: ['admin', 'professor']
-     */
-    // protected function verificarPermissao(): ?json {
-    //     $usuario = $sessao->obterDados('usuario_id');
-
-    //     if (!isset($usuario)) {
-    //         return $this->ApiController::json($response, ['erro' => 'Acesso negado.'], 403);
-    //     }
-
-    //     return null;
-    // }
 }

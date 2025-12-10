@@ -12,7 +12,6 @@ class UsuarioRepositoryBDR implements UsuarioRepository
 
     public function __construct()
     {
-        // Conecta ao banco de dados assim que a classe é instanciada
         $this->pdo = Database::getConnection();
     }
 

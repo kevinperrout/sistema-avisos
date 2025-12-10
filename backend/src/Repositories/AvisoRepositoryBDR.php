@@ -12,7 +12,6 @@ class AvisoRepositoryBDR implements AvisoRepository
 
     public function __construct()
     {
-        // Conecta ao banco de dados assim que a classe é instanciada
         $this->pdo = Database::getConnection();
     }
 

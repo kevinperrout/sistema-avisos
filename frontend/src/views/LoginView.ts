@@ -1,6 +1,6 @@
 import { Modal } from "bootstrap";
 
-// Exibe o modal de login do usuario antes de iniciar um quiz.
+// Exibe o modal de login do usuario.
 // Usa o modal padrão do Bootstrap já existente no HTML.
 export class LoginView {
   private modal: Modal;
@@ -24,7 +24,7 @@ abrir(onSubmit: (email: string, senha: string) => Promise<void>, tituloPersonali
     erroEl.classList.add("d-none");
 
     if (tituloEl) {
-        tituloEl.textContent = tituloPersonalizado || "Identifique-se para iniciar o Quiz";
+        tituloEl.textContent = tituloPersonalizado || "Faça seu login";
     }
 
     form.onsubmit = async (e) => {

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use Exception;
 use App\Services\AuthService;
 use App\Services\AvisoService;
 use App\Presenters\AvisoPresenter;
@@ -20,11 +20,21 @@ class AvisoController extends ApiController
     public function cadastrar(Request $request, Response $response): Response
     {
         $dados = (array)$request->getParsedBody();
+        $idUsuario = $this->sessao->obterDados('usuario_id');
+        $resultado = null;
 
-        $id = $this->sessao->obterDados('usuario_id');
-        $resultado = $this->avisoService
-            ->criarAviso($dados, $id);
-
+        if($idUsuario) {
+            try {
+            $resultado = $this->avisoService
+            ->criarAviso($dados, $idUsuario);
+            } catch (Exception $e) {
+                return $this->json(
+                    $response, 
+                    ['erro' => "Erro interno no servidor. Tente novamente."], 
+                    500
+                );
+            }
+        }
         $status = !empty($resultado) ? 201 : 403;
 
         $payload = !empty($resultado)

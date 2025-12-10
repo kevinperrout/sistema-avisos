@@ -67,7 +67,7 @@ export class CadastroAvisoView {
                                 <label class="form-check-label text-danger fw-bold" for="urgente">URGENTE</label>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-primary">Salvar aviso</button>
+                                <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar aviso</button>
                             </div>
                         </form>
                     </div>

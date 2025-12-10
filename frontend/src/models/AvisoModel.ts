@@ -31,25 +31,33 @@ export interface Periodo {
 
 export class AvisoModel {
   async listarAvisos(): Promise<Aviso[]> {
-    const response = await api.get<Aviso[]>("/avisos");
-    return response || [];
+    try {
+      const response = await api.get<Aviso[]>("/avisos");
+      return response;
+    } catch (error) {
+      return [];
+    }
   }
 
   async listarSetores(): Promise<Setor[]> {
-    const setores = await api.get<Setor[]>("/setores");
-    return setores || [];
+    try {
+      const setores = await api.get<Setor[]>("/setores");
+      return setores;
+    } catch (error) {
+      return [];
+    }
   }
 
   async listarPeriodos(): Promise<Periodo[]> {
-    const periodos = await api.get<Periodo[]>("/periodos");
-    return periodos || [];
+    try {
+      const periodos = await api.get<Periodo[]>("/periodos");
+      return periodos;
+    } catch (error) {
+      return [];
+    }
   }
 
   async cadastrar(aviso: Aviso): Promise<void> {
     await api.post("/avisos", aviso);
-  }
-
-  async excluir(idAviso: number): Promise<void> {
-    await api.post(`/avisos/${idAviso}/delete`);
   }
 }

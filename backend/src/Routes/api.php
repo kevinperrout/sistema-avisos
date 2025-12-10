@@ -58,7 +58,7 @@ return function (App $app) {
     use ($usuarioController, $avisoController, $setorController, $periodoController) {
 
         $group->get('/', function ($req, $res) {
-            $msg = "API do Quiz funcionando. Vá para /api/cursos.";
+            $msg = "API funcionando.";
             $res->getBody()->write($msg);
             return $res;
         });

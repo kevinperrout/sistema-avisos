@@ -17,9 +17,6 @@ class SetorController extends ApiController
 
     public function listar(Request $request, Response $response): Response
     {
-        // if ($retornoPermissao = $this->verificarPermissao($response, $this->sessao, ['admin', 'professor'])) {
-        //     return $retornoPermissao;
-        // }
         $listaSetors = $this->SetorService->listarSetores();
 
         return $this->json($response, $listaSetors);

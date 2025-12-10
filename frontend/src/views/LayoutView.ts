@@ -37,7 +37,7 @@ export class LayoutView {
         } else {
             loginView.abrir(async (email, senha) => {
                 await auth.login(email, senha);
-            }, "Acesso Restrito");
+            }, "Faça seu login");
         }
       });
     }
